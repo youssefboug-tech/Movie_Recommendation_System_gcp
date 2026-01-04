@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IA Movie Rec</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 12px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #1a73e8; border-bottom: 2px solid #e8eaed; padding-bottom: 10px; }
+        .section { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #dee2e6; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #1a73e8; color: white; border-radius: 4px 4px 0 0; }
+        .btn { background: #1a73e8; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn:hover { background: #1557b0; }
+        input, select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 IA Movie Recommender</h1>
+        
+        <div class="section">
+            <h3>🔍 Recommandations Personnalisées</h3>
+            <form action="./recommend" method="get">
+                ID Utilisateur : <input type="number" name="user_id" value="1" required>
+                <button type="submit" class="btn">Calculer les Recos</button>
+            </form>
+        </div>
+
+        <div class="section">
+    <h3>⭐ Noter un nouveau film</h3>
+    <form action="add_rating" method="get">
+        ID Utilisateur : <input type="number" name="user_id" value="99999" required style="width: 80px;">
+        
+        Film : 
+        <select name="movie_id" style="width: 250px;">
+            {% for movie in movies %}
+            <option value="{{ movie.movieId }}">{{ movie.title }}</option>
+            {% endfor %}
+        </select>
+        
+        Note : <input type="number" name="rating" step="0.5" min="0.5" max="5" value="5">
+        <button type="submit" class="btn" style="background: #34a853;">Enregistrer</button>
+    </form>
+</div>
+
+        {% if tables %}
+            <h2>Résultats pour l'utilisateur {{ user_id }}</h2>
+            <div style="overflow-x:auto;">
+                {{ tables|safe }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

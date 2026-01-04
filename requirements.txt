@@ -1,0 +1,6 @@
+flask
+pandas
+google-cloud-bigquery
+scikit-surprise
+db-dtypes
+gunicorn
